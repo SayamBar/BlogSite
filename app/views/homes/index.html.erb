@@ -1,2 +1,11 @@
-<h1>Homes#index</h1>
-<p>Find me in app/views/homes/index.html.erb</p>
+
+<% @posts.each do |post| %>
+    <% if User.find(post.user_id).avatar.attached? %>
+        <%= link_to image_tag(User.find(post.user_id).avatar, style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(current_user.id), class: :"me-2" %>
+    <%else%>
+        <%= link_to image_tag("user.jpg", style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(current_user.id), class: :"me-2" %>
+    <%end%>
+    <%# <%= User.find(post.user_id).avatar %>
+    <%= User.find(post.user_id).fullname %><br>
+    <%= post.description %>
+<% end %>

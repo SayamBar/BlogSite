@@ -1,0 +1,33 @@
+<div class="d-grid gap-0">
+    <div class="container shadow p-3 mt-3">
+        <% if User.find(post.user_id).avatar.attached? %>
+            <%= link_to image_tag(User.find(post.user_id).avatar, style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(User.find(post.user_id)), class: :"me-2" %>
+        <%else%>
+            <%= link_to image_tag("user.jpg", style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(User.find(post.user_id)), class: :"me-2" %>   
+        <%end%>         
+            <strong><%= User.find(post.user_id).fullname %></strong><br><br>
+            <%= post.description %><br>
+            <% c = 1 %>
+            <% if post.images.attached? %>
+                <% if post.images.count >= 4%>
+                    <% post.images.each do |image| %>
+                        <%= link_to image_tag(image.variant(resize_to_fit: [300/post.images.count,300/post.images.count])), post %>
+                    <% end %>
+                <% end %>
+                <% if post.images.count >= 2%>
+                    <% post.images.each do |image| %>
+                        <%= link_to image_tag(image.variant(resize_to_fit: [300,300])), post %>
+                        <% if c==3 %>
+                            <br>
+                        <% end %>
+                        <% c += 1 %>
+                    <% end %>
+                <% else %>
+                    <% post.images.each do |image| %>
+                        <%= link_to image_tag(image.variant(format: 'jpg', resize_to_fit: [300,300])), post %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <br>
+    </div>
+</div>

@@ -15,22 +15,9 @@
     <%= form.text_area :description, placeholder: "description" %>
   </div>
   <br>
-  <div>
-    <% if @post.images.attached? %>
-      <div>
-        <% if @post.images.image? %>
-            <%= image_tag(@post.images) %>
-        <% elsif @post.images.video? %>
-            <div>
-                <%= video_tag(url_for(@post.images), controls: "", class:"video") %>
-            </div>
-        <% end %>
-    </div>
-    <% end %>
+  
     <div><%= form.file_field :images, multiple: true %></div><br>
-  </div>
-
-
+  
   <div>
     <%= form.submit %>
   </div>

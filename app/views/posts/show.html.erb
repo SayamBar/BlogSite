@@ -1,0 +1,13 @@
+<%= link_to root_path do %>
+    <i class="fa-solid fa-circle-arrow-left text-secondary fs-4 me-3"></i>
+<% end %>
+<% if current_user.id == @post.user.id %>
+    <%= link_to edit_path(@post) do %>
+        <i class="fa-solid fa-pen-to-square text-warning fs-4 me-3"></i>
+    <% end %>
+    <%= button_to destroy_path(@post), method: :delete do %>
+        <i class="fa-solid fa-trash text-danger fs-4"></i>
+    <% end %>
+<% end %>
+<br><br>
+<%= render @post %>

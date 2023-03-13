@@ -4,41 +4,37 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-    </div>
     <% if user_signed_in? %>
-          <% if current_user.avatar.attached? %>
-            <%= link_to image_tag(current_user.avatar, style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(current_user.id), class: :"me-2" %>
-          <%else%>
-            <%= link_to image_tag("user.jpg", style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(current_user.id), class: :"me-2" %>
-          <%end%>
-        <strong><%= link_to current_user.fullname, edit_user_registration_path(current_user.id) ,class: :"nav-link me-2" %></strong>
-        <%= button_to "Logout",destroy_user_session_path, method: :delete ,class: :"btn btn-danger"%>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <%= link_to root_path, class:"nav-link active" do %>
+              <i class="fa-solid fa-house"></i>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to posts_new_path, class:"nav-link" do %>
+              <i class="fa-regular fa-square-plus fs-4"></i>
+            <% end%>
+          </li>
+        </ul>
+      </div>
+      <% if current_user.avatar.attached? %>
+        <%= link_to image_tag(current_user.avatar, style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(current_user.id), class: :"me-2" %>
+      <%else%>
+        <%= link_to image_tag("user.jpg", style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(current_user.id), class: :"me-2" %>
+      <%end%>
+      <strong><%= link_to current_user.fullname, edit_user_registration_path(current_user.id) ,class: :"nav-link me-2" %></strong>
+      <%= button_to destroy_user_session_path, method: :delete ,class: :"btn btn-danger" do %>
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+      <% end %>
     <% else %>
-        <%= link_to "SignUp",new_user_registration_path,:class => 'navber-link btn btn-primary me-2' %>
-        <%= link_to "Login",new_user_session_path,:class => 'navber-link btn btn-primary' %>
+        <%# <%= link_to "SignUp",new_user_registration_path,:class => 'navber-link btn btn-primary me-2' %> 
+        <%= link_to new_user_session_path,:class => 'navber-link btn btn-primary' do %> 
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Login
+        <% end %>
     <% end %>    
   </div>
 </nav>

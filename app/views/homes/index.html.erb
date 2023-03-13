@@ -1,11 +1,34 @@
-
-<% @posts.each do |post| %>
-    <% if User.find(post.user_id).avatar.attached? %>
-        <%= link_to image_tag(User.find(post.user_id).avatar, style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(current_user.id), class: :"me-2" %>
-    <%else%>
-        <%= link_to image_tag("user.jpg", style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(current_user.id), class: :"me-2" %>
-    <%end%>
-    <%# <%= User.find(post.user_id).avatar %>
-    <%= User.find(post.user_id).fullname %><br>
-    <%= post.description %>
-<% end %>
+<div class="d-grid gap-3">
+    <% @posts.each do |post| %>
+        <div class="container shadow p-3">
+            <% if User.find(post.user_id).avatar.attached? %>
+                <%= link_to image_tag(User.find(post.user_id).avatar, style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(User.find(post.user_id)), class: :"me-2" %>
+            <%else%>
+                <%= link_to image_tag("user.jpg", style:"width:35px; height:35px; border-radius:50%"), edit_user_registration_path(User.find(post.user_id)), class: :"me-2" %>
+            <%end%>
+            <%= User.find(post.user_id).fullname %><br><br>
+            <%= post.description %><br>
+            <% c = 1 %>
+            <% if post.images.attached? %>
+                <% if post.images.count >= 4%>
+                    <% post.images.each do |image| %>
+                        <%= image_tag(image.variant(resize_to_fit: [300/post.images.count,300/post.images.count])) %>
+                    <% end %>
+                <% end %>
+                <% if post.images.count >= 2%>
+                    <% post.images.each do |image| %>
+                        <%= image_tag(image.variant(resize_to_fit: [300,300])) %>
+                        <% if c==2 %>
+                            <br>
+                        <% end %>
+                        <% c += 1 %>
+                    <% end %>
+                <% else %>
+                    <% post.images.each do |image| %>
+                        <%= image_tag(image.variant(resize_to_fit: [300,300])) %>
+                    <% end %>
+                <% end %>
+            <% end %><br>
+        </div>
+    <% end %>
+</div>

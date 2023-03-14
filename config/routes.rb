@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   get 'posts/:id/edit', to:"posts#edit", as:'edit'
   patch 'posts/:id', to:"posts#update"
   delete 'posts/:id', to:"posts#destroy", as:'destroy'
+
+  get 'users/:id', to:"users#show", as:"profile"
 end

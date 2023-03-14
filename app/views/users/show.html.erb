@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-3 text-center">
+        <% if @user.avatar.attached? %>
+            <%= image_tag(@user.avatar.variant(resize_to_fit: [100,100])) %>
+        <% else %>
+            <%= image_tag("user.jpg", style:"width:100px; height:100px") %>
+        <% end %>
+    </div>
+    <div class="col-3">
+        <%= @user.fullname %><br>
+        <%= @user.bio %><br>
+        <%= @user.phone %><br>
+        <%= @user.gender %><br>
+    </div>
+</div>
+<% c = 0 %>
+<div class="text-center fs-3">Posts</div><br>
+<div class="row">
+    <div class="col-3"></div>
+    <% @user.posts.each do |post| %>
+        <% post.images.each do |image| %>
+            <% c += 1%>
+            <% if c % 3 == 1 %>
+                <div class="row"></div>
+                <div class="col-3"></div>
+            <% end %>
+            <div class="col-2 text-center">
+                <%= image_tag(image.variant(resize_to_fit: [200,200])) %>
+            </div>
+        <% end %>
+    <% end %>
+    <div class="col-3"></div>
+</div>

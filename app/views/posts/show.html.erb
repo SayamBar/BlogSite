@@ -1,13 +1,19 @@
-<%= link_to root_path do %>
-    <i class="fa-solid fa-circle-arrow-left text-secondary fs-4 me-3"></i>
-<% end %>
-<% if current_user.id == @post.user.id %>
-    <%= link_to edit_path(@post) do %>
-        <i class="fa-solid fa-pen-to-square text-warning fs-4 me-3"></i>
+<div class="d-flex">    
+    <%= link_to root_path do %>
+        <i class="fa-solid fa-circle-arrow-left text-white fs-4 me-3 btn btn-primary"></i>
     <% end %>
-    <%= button_to destroy_path(@post), method: :delete do %>
-        <i class="fa-solid fa-trash text-danger fs-4"></i>
+    <% if current_user.id == @post.user.id %>
+        <%= link_to edit_path(@post) do %>
+            <i class="fa-solid fa-pen-to-square text-warning fs-4 me-3 btn btn-info"></i>
+        <% end %>
+        <%= button_to destroy_path(@post), method: :delete, class:"btn btn-danger" do %>
+            <i class="fa-solid fa-trash text-white fs-5"></i>
+        <% end %>
     <% end %>
-<% end %>
+</div>
 <br><br>
-<%= render @post %>
+<div class="d-grid gap-0">
+    <div class="container shadow p-3 mt-3">
+        <%= render @post %>
+    </div>
+</div>

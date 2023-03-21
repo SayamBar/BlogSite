@@ -22,14 +22,24 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  # describe "POST sessions/create" do
-  #   let(:user) { create(:user) }
-  #   it "saves the user_id in session" do
-  #     sign_in user
-  #     # debugger
-  #     expect(response).to have_http_status(:ok)
-  #   end
+  describe "POST sessions/create" do
+    let(:user1) { create(:user) }
+    it "saves the user_id in session" do
+      # session[:user_id] = user1.id
+      sign_in user1
+      get root_path
+      # debugger
+      expect(response).to have_http_status(:ok)
+    end
+  end
 
+  describe "user login" do 
+    let(:user1) { create(:user) }
+    it "renders the index page after login" do
+      get root_path
+      expect(response).to have_http_status(302)
+    end
+  end
   #   it "session is nil by default" do
   #     post '/users/sign_in'
   #     expect(session[:user_id]).to eq(nil)
@@ -42,5 +52,4 @@ RSpec.describe "Users", type: :request do
   #       get edit_user_registration_path(user)
   #       expect(response).to be_successful
   #     end
-  # end
 end

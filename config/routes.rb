@@ -14,4 +14,10 @@ Rails.application.routes.draw do
   delete 'posts/:id', to:"posts#destroy", as:'destroy'
 
   get 'users/:id', to:"users#show", as:"profile"
+  namespace :api do
+    namespace :v1 do
+      resources :posts
+    end
+  end
+  
 end

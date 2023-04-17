@@ -78,3 +78,4 @@ end
 
 gem 'devise'
 gem 'simplecov', require: false, group: :test
+gem 'doorkeeper', '~> 5.4.0'

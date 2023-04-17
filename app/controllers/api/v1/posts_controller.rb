@@ -5,8 +5,18 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     end
     def show
         @post = Post.find(params[:id])
+        @res = {}
+        @url = []
+        if @post.images.attached?
+            @post.images.each do |i|
+                @url << rails_blob_url(i)
+            end
+        end
         if @post
-            render json: @post, status: 200
+            @res[:post] = [@post]
+            @res[:post] << @url if !@url.empty?
+            # debugger
+            render json: @res, status: 200
         else
             render json:{error: "post not found" }
         end
